@@ -33,31 +33,31 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start bg-transparent">
       {/* Hero Section */}
       <div className="text-center mb-16 px-4 md:px-0">
-        <h1 className="text-5xl font-bold text-gray-900 mb-6">
+        <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 mb-6 font-sans drop-shadow-lg">
           {t('welcome')}
         </h1>
-        <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
           {t('description')}
         </p>
         <div className="flex justify-center space-x-6">
           <Link
             to="/address"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="bg-gradient-to-r from-orange-400 to-orange-600 shadow-lg hover:shadow-2xl text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 focus:ring-4 focus:ring-orange-400/40 backdrop-blur-lg"
           >
             {t('generateAddress')}
           </Link>
           <Link
             to="/phone"
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="bg-gradient-to-r from-orange-400 to-orange-600 shadow-lg hover:shadow-2xl text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 focus:ring-4 focus:ring-orange-400/40 backdrop-blur-lg"
           >
             {t('generatePhone')}
           </Link>
           <Link
             to="/credit-card"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="bg-gradient-to-r from-orange-400 to-orange-600 shadow-lg hover:shadow-2xl text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 focus:ring-4 focus:ring-orange-400/40 backdrop-blur-lg"
           >
             {t('generateCreditCard')}
           </Link>
@@ -65,21 +65,21 @@ const Home: React.FC = () => {
       </div>
 
       {/* Features Grid */}
-      <div className="grid md:grid-cols-3 gap-8 mb-16 px-4 md:px-0">
+      <div className="grid md:grid-cols-3 gap-8 mb-16 px-4 md:px-0 w-full max-w-7xl">
         {features.map((feature, index) => (
           <Link
             key={index}
             to={feature.path}
             className="group block"
           >
-            <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className={`w-16 h-16 ${feature.color} rounded-xl flex items-center justify-center text-white text-3xl mb-6 group-hover:scale-110 transition-transform duration-200`}>
+            <div className="bg-white/30 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:ring-2 hover:ring-orange-400/40">
+              <div className={`w-16 h-16 ${feature.color} bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center text-white text-3xl mb-6 group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                 {feature.icon}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-500 transition-colors font-sans">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 text-lg leading-relaxed font-medium">
                 {feature.description}
               </p>
             </div>
@@ -88,27 +88,27 @@ const Home: React.FC = () => {
       </div>
 
       {/* Info Section */}
-      <div className="bg-white rounded-xl shadow-lg p-4 md:p-10 mx-0 md:mx-auto w-full">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+      <div className="bg-white/40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 p-4 md:p-10 mx-0 md:mx-auto w-full max-w-5xl">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center font-sans">
           {t('selectGenerator')}
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-300 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">📍</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 font-sans">
                   {t('addressGenerator')}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 mb-4 leading-relaxed font-medium">
                   Generate realistic addresses for different countries and regions. 
                   All addresses are formatted according to local standards.
                 </p>
                 <Link
                   to="/address"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg"
+                  className="inline-flex items-center text-orange-500 hover:text-orange-600 font-semibold text-lg transition-colors"
                 >
                   {t('generateAddress')} →
                 </Link>
@@ -116,20 +116,20 @@ const Home: React.FC = () => {
             </div>
 
             <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-300 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">📱</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 font-sans">
                   {t('phoneGenerator')}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 mb-4 leading-relaxed font-medium">
                   Generate phone numbers with proper country codes and formatting. 
                   Numbers follow international standards for each country.
                 </p>
                 <Link
                   to="/phone"
-                  className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold text-lg"
+                  className="inline-flex items-center text-orange-500 hover:text-orange-600 font-semibold text-lg transition-colors"
                 >
                   {t('generatePhone')} →
                 </Link>
@@ -139,20 +139,20 @@ const Home: React.FC = () => {
 
           <div className="space-y-6">
             <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-300 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">💳</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 font-sans">
                   {t('creditCardGenerator')}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 mb-4 leading-relaxed font-medium">
                   Generate credit card information with Luhn algorithm validation. 
                   Cards include proper card types for each country.
                 </p>
                 <Link
                   to="/credit-card"
-                  className="inline-flex items-center text-purple-600 hover:text-purple-700 font-semibold text-lg"
+                  className="inline-flex items-center text-orange-500 hover:text-orange-600 font-semibold text-lg transition-colors"
                 >
                   {t('generateCreditCard')} →
                 </Link>
@@ -160,14 +160,14 @@ const Home: React.FC = () => {
             </div>
 
             <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-300 rounded-lg flex items-center justify-center">
                 <span className="text-2xl">🌍</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 font-sans">
                   {t('language')}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 mb-4 leading-relaxed font-medium">
                   Switch between Chinese and English interfaces. 
                   All generated content adapts to your selected language.
                 </p>

@@ -28,11 +28,65 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(120deg, #fff7ed 0%, #f5f6fa 100%);
+  position: relative;
+  font-family: 'Inter', 'Poppins', 'SF Pro', 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  left: 40vw;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(255,186,90,0.25) 0%, rgba(255,122,24,0.12) 60%, transparent 100%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.8;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10vw;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255,186,90,0.18) 0%, rgba(255,122,24,0.10) 60%, transparent 100%);
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0.7;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* SVG流光动画 */
+.bg-glow {
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
+  width: 600px;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .bg-glow {
+    width: 300px;
+    height: 300px;
+    left: 0;
+    top: 20vh;
+  }
 }
 
 h1 {

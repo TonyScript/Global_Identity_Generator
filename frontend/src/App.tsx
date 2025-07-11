@@ -41,7 +41,18 @@ i18n
           feedback: '反馈',
           loading: '生成中...',
           error: '生成失败',
-          success: '生成成功'
+          success: '生成成功',
+          addressGeneratorSubtitle: '选择国家/地区，生成符合当地格式的真实地址信息',
+          phoneGeneratorSubtitle: '选择国家/地区，生成符合当地格式的手机号码',
+          creditCardGeneratorSubtitle: '选择国家/地区，生成符合Luhn算法校验的信用卡信息',
+          resultTitle: '生成结果',
+          usageTitle: '使用说明',
+          addressUsageDesc: '生成的地址仅用于测试和学习目的，不代表真实存在的地址。所有地址都符合当地格式规范。',
+          phoneUsageDesc: '生成的手机号仅用于测试和学习目的，不代表真实存在的号码。所有号码都符合国际格式规范。',
+          creditCardUsageDesc: '生成的信用卡信息仅用于测试和学习目的，不代表真实存在的卡片。所有卡号都通过了Luhn算法校验。',
+          phoneEmptyTip: '点击生成按钮开始生成手机号',
+          creditCardEmptyTip: '点击生成按钮开始生成信用卡信息',
+          addressEmptyTip: '点击生成按钮开始生成地址',
         }
       },
       en: {
@@ -67,7 +78,18 @@ i18n
           feedback: 'Feedback',
           loading: 'Generating...',
           error: 'Generation failed',
-          success: 'Generated successfully'
+          success: 'Generated successfully',
+          addressGeneratorSubtitle: 'Select country/region to generate a real address in local format',
+          phoneGeneratorSubtitle: 'Select country/region to generate a phone number in local format',
+          creditCardGeneratorSubtitle: 'Select country/region to generate a credit card with Luhn validation',
+          resultTitle: 'Result',
+          usageTitle: 'Usage',
+          addressUsageDesc: 'The generated address is for testing and learning purposes only and does not represent a real address. All addresses conform to local format standards.',
+          phoneUsageDesc: 'The generated phone number is for testing and learning purposes only and does not represent a real number. All numbers conform to international format standards.',
+          creditCardUsageDesc: 'The generated credit card information is for testing and learning purposes only and does not represent a real card. All card numbers pass Luhn validation.',
+          phoneEmptyTip: 'Click the generate button to start generating a phone number',
+          creditCardEmptyTip: 'Click the generate button to start generating credit card information',
+          addressEmptyTip: 'Click the generate button to start generating an address',
         }
       }
     },
@@ -98,74 +120,67 @@ const Navbar: React.FC = () => {
   const currentLang = languageOptions.find(opt => opt.code === i18n.language) || languageOptions[0];
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-gray-900">
-                {t('siteTitle')}
-              </h1>
-            </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/30 backdrop-blur-xl border-b border-orange-200/60 shadow-lg">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex justify-between items-center h-20">
+        {/* Logo/Brand */}
+        <div className="flex items-center">
+          <span className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent drop-shadow-lg select-none">
+            AddressGen
+          </span>
+        </div>
+        {/* 导航链接 */}
+        <div className="hidden md:block">
+          <div className="flex items-center space-x-8">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-lg text-base font-medium transition-colors"
+            >
+              {t('home')}
+            </Link>
+            <Link
+              to="/address"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-lg text-base font-medium transition-colors"
+            >
+              {t('addressGenerator')}
+            </Link>
+            <Link
+              to="/phone"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-lg text-base font-medium transition-colors"
+            >
+              {t('phoneGenerator')}
+            </Link>
+            <Link
+              to="/credit-card"
+              className="text-gray-700 hover:text-orange-500 px-4 py-2 rounded-lg text-base font-medium transition-colors"
+            >
+              {t('creditCardGenerator')}
+            </Link>
           </div>
-
-          {/* 导航链接 */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-base font-medium transition-colors"
-              >
-                {t('home')}
-              </Link>
-              <Link
-                to="/address"
-                className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-base font-medium transition-colors"
-              >
-                {t('addressGenerator')}
-              </Link>
-              <Link
-                to="/phone"
-                className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-base font-medium transition-colors"
-              >
-                {t('phoneGenerator')}
-              </Link>
-              <Link
-                to="/credit-card"
-                className="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-base font-medium transition-colors"
-              >
-                {t('creditCardGenerator')}
-              </Link>
-            </div>
-          </div>
-
-          {/* 语言切换 */}
-          <div className="flex items-center">
-            <div className="relative">
-              <button
-                onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                className="flex items-center text-gray-700 hover:text-blue-600 px-4 py-2 rounded-lg text-base font-medium transition-colors border-2 border-blue-500"
-              >
-                {/* 只显示当前语言和国旗 */}
-                <span>{currentLang.label}</span>
-                <span className="text-lg ml-2">{currentLang.flag}</span>
-              </button>
-              {showLanguageMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 border border-gray-200">
-                  {languageOptions.map(opt => (
-                    <button
-                      key={opt.code}
-                      onClick={() => handleLanguageChange(opt.code)}
-                      disabled={i18n.language === opt.code}
-                      className={`block w-full text-left px-4 py-3 text-base transition-colors rounded-lg ${i18n.language === opt.code ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
-                    >
-                      {opt.label} <span className="ml-2">{opt.flag}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+        </div>
+        {/* 语言切换 */}
+        <div className="flex items-center">
+          <div className="relative">
+            <button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              className="flex items-center text-gray-700 hover:text-orange-500 px-4 py-2 rounded-lg text-base font-medium transition-colors border-2 border-orange-400/60 bg-white/40 backdrop-blur-md shadow"
+            >
+              <span>{currentLang.label}</span>
+              <span className="text-lg ml-2">{currentLang.flag}</span>
+            </button>
+            {showLanguageMenu && (
+              <div className="absolute right-0 mt-2 w-48 bg-white/80 rounded-lg shadow-lg py-2 z-10 border border-orange-200/60 backdrop-blur-md">
+                {languageOptions.map(opt => (
+                  <button
+                    key={opt.code}
+                    onClick={() => handleLanguageChange(opt.code)}
+                    disabled={i18n.language === opt.code}
+                    className={`block w-full text-left px-4 py-3 text-base transition-colors rounded-lg ${i18n.language === opt.code ? 'bg-orange-100 text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-orange-50'}`}
+                  >
+                    {opt.label} <span className="ml-2">{opt.flag}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -176,9 +191,22 @@ const Navbar: React.FC = () => {
 // 主布局组件
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-transparent pt-24">
       <Navbar />
-      <main className="w-full px-4 sm:px-8 lg:px-16 py-12">
+      {/* SVG流光背景 */}
+      <svg className="bg-glow" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#FFB347" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#FF7A18" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="300" cy="300" rx="280" ry="180" fill="url(#glow1)" />
+        <ellipse cx="400" cy="200" rx="120" ry="80" fill="#FF9800" fillOpacity="0.12">
+          <animate attributeName="rx" values="120;180;120" dur="6s" repeatCount="indefinite" />
+        </ellipse>
+      </svg>
+      <main className="w-full px-0 py-6 flex flex-col items-center justify-start">
         {children}
       </main>
     </div>

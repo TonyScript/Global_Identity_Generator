@@ -45,103 +45,97 @@ const AddressGenerator: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
-      <div className="bg-white rounded-xl shadow-lg p-4 md:p-8 w-full mx-0 md:mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            📍 {t('addressGenerator')}
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            选择国家/地区，生成符合当地格式的真实地址信息
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 w-full">
-          {/* 左侧：控制面板 */}
-          <div className="space-y-6">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start bg-transparent">
+      <div className="relative w-full max-w-4xl mx-auto mt-16 mb-12">
+        <div className="absolute -inset-1 bg-gradient-to-br from-orange-200/60 via-white/0 to-orange-400/30 rounded-3xl blur-2xl opacity-80 animate-pulse z-0" />
+        <div className="relative z-10 bg-white/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/40 p-8 md:p-14 flex flex-col md:flex-row gap-10 md:gap-16 items-stretch">
+          {/* 左侧：操作区 */}
+          <div className="flex-1 flex flex-col justify-center gap-8 min-w-[260px]">
             <div>
-              <label className="block text-lg font-medium text-gray-700 mb-3">
-                {t('selectCountry')}
-              </label>
-              <select
-                value={selectedCountry}
-                onChange={(e) => setSelectedCountry(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base"
-              >
-                {countries.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
+              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-4 font-sans drop-shadow-xl flex items-center gap-3">
+                <span className="text-4xl md:text-5xl">📍</span> {t('addressGenerator')}
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 font-medium mb-6">
+                {t('addressGeneratorSubtitle')}
+              </p>
             </div>
-
-            <button
-              onClick={handleGenerate}
-              disabled={!selectedCountry || isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-4 px-6 rounded-lg text-lg transition-colors duration-200"
-            >
-              {isLoading ? (
-                <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  {t('loading')}
+            <div className="space-y-6">
+              <div>
+                <label className="block text-base md:text-lg font-semibold text-gray-800 mb-2 font-sans">
+                  {t('selectCountry')}
+                </label>
+                <select
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 text-base bg-white/70 backdrop-blur-md transition-all duration-300"
+                >
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                onClick={handleGenerate}
+                disabled={!selectedCountry || isLoading}
+                className="w-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:from-orange-500 hover:to-orange-700 disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-2xl text-xl shadow-xl transition-all duration-300 hover:scale-105 focus:ring-4 focus:ring-orange-400/40 relative overflow-hidden group"
+              >
+                <span className="relative z-10">
+                  {isLoading ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      {t('loading')}
+                    </span>
+                  ) : (
+                    t('generateAddress')
+                  )}
                 </span>
-              ) : (
-                t('generateAddress')
-              )}
-            </button>
+                <span className="absolute left-0 top-0 w-full h-full bg-gradient-to-r from-white/30 via-orange-200/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg" />
+              </button>
+            </div>
           </div>
-
-          {/* 右侧：结果显示 */}
-          <div className="space-y-6">
+          {/* 右侧：结果区 */}
+          <div className="flex-1 flex flex-col justify-center gap-8 min-w-[260px]">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                生成结果
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 font-sans flex items-center gap-2">
+                <span className="text-orange-500">📦</span> {t('resultTitle')}
               </h3>
               {generatedAddress ? (
-                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
-                    <p className="text-gray-800 text-lg font-mono break-all leading-relaxed">
-                      {generatedAddress}
-                    </p>
-                  </div>
+                <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-orange-100 shadow-lg flex flex-col gap-4 animate-fade-in">
+                  <p className="text-gray-800 text-lg font-mono break-all leading-relaxed select-all">
+                    {generatedAddress}
+                  </p>
                   <button
                     onClick={copyToClipboard}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+                    className="w-full bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold py-3 px-4 rounded-xl transition-all duration-200 shadow hover:shadow-lg focus:ring-4 focus:ring-orange-400/40"
                   >
                     {copySuccess ? t('copied') : t('copy')}
                   </button>
                 </div>
               ) : (
-                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 text-center">
+                <div className="bg-white/60 backdrop-blur-md rounded-2xl p-6 border border-orange-100 text-center animate-fade-in">
                   <p className="text-gray-500 text-lg">
-                    点击生成按钮开始生成地址
+                    {t('addressEmptyTip')}
                   </p>
                 </div>
               )}
             </div>
           </div>
         </div>
-
-        {/* 底部提示 */}
-        <div className="mt-12 p-6 bg-blue-50 rounded-lg border border-blue-200">
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-semibold text-blue-900">
-                使用说明
-              </h3>
-              <p className="text-sm text-blue-800 mt-1">
-                生成的地址仅用于测试和学习目的，不代表真实存在的地址。所有地址都符合当地格式规范。
-              </p>
-            </div>
+      </div>
+      {/* 底部说明区 */}
+      <div className="w-full max-w-4xl mx-auto mt-2">
+        <div className="flex items-center gap-3 p-4 bg-white/70 backdrop-blur-lg rounded-xl border-l-4 border-orange-400 shadow-md">
+          <span className="text-2xl text-orange-400">ℹ️</span>
+          <div>
+            <h3 className="text-base font-bold text-orange-900 mb-1">{t('usageTitle')}</h3>
+            <p className="text-sm text-orange-800">
+              {t('addressUsageDesc')}
+            </p>
           </div>
         </div>
       </div>
