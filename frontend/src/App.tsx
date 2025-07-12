@@ -8,6 +8,8 @@ import AddressGenerator from './pages/AddressGenerator';
 import PhoneGenerator from './pages/PhoneGenerator';
 import CreditCardGenerator from './pages/CreditCardGenerator';
 import Footer from './components/Footer';
+import Guides from './pages/Guides';
+import Docs from './pages/Docs';
 
 // 国际化
 import { useTranslation } from 'react-i18next';
@@ -232,6 +234,8 @@ function App() {
           <Route path="/address" element={<AddressGenerator />} />
           <Route path="/phone" element={<PhoneGenerator />} />
           <Route path="/credit-card" element={<CreditCardGenerator />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/docs" element={<Docs />} />
         </Routes>
       </Layout>
     </Router>
