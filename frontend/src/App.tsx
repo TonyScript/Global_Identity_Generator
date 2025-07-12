@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import AddressGenerator from './pages/AddressGenerator';
 import PhoneGenerator from './pages/PhoneGenerator';
 import CreditCardGenerator from './pages/CreditCardGenerator';
+import Footer from './components/Footer';
 
 // 国际化
 import { useTranslation } from 'react-i18next';
@@ -53,6 +54,10 @@ i18n
           phoneEmptyTip: '点击生成按钮开始生成手机号',
           creditCardEmptyTip: '点击生成按钮开始生成信用卡信息',
           addressEmptyTip: '点击生成按钮开始生成地址',
+          addressDescription: '生成不同国家和地区的真实格式地址，所有地址均符合当地标准。',
+          phoneDescription: '生成带有正确国家区号和格式的手机号码，号码符合国际标准。',
+          creditCardDescription: '生成符合Luhn算法校验的信用卡信息，卡片类型符合各国规范。',
+          languageDescription: '可在中英文界面间切换，所有生成内容会根据所选语言自动适配。',
         }
       },
       en: {
@@ -90,11 +95,15 @@ i18n
           phoneEmptyTip: 'Click the generate button to start generating a phone number',
           creditCardEmptyTip: 'Click the generate button to start generating credit card information',
           addressEmptyTip: 'Click the generate button to start generating an address',
+          addressDescription: 'Generate realistic addresses for different countries and regions. All addresses are formatted according to local standards.',
+          phoneDescription: 'Generate phone numbers with proper country codes and formatting. Numbers follow international standards for each country.',
+          creditCardDescription: 'Generate credit card information with Luhn algorithm validation. Cards include proper card types for each country.',
+          languageDescription: 'Switch between Chinese and English interfaces. All generated content adapts to your selected language.',
         }
       }
     },
-    lng: 'zh',
-    fallbackLng: 'zh',
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false
     }
@@ -125,7 +134,7 @@ const Navbar: React.FC = () => {
         {/* Logo/Brand */}
         <div className="flex items-center">
           <span className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent drop-shadow-lg select-none">
-            AddressGen
+            Global Identity Generator
           </span>
         </div>
         {/* 导航链接 */}
@@ -168,13 +177,13 @@ const Navbar: React.FC = () => {
               <span className="text-lg ml-2">{currentLang.flag}</span>
             </button>
             {showLanguageMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white/80 rounded-lg shadow-lg py-2 z-10 border border-orange-200/60 backdrop-blur-md">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 border border-orange-200/60 backdrop-blur-md">
                 {languageOptions.map(opt => (
                   <button
                     key={opt.code}
                     onClick={() => handleLanguageChange(opt.code)}
                     disabled={i18n.language === opt.code}
-                    className={`block w-full text-left px-4 py-3 text-base transition-colors rounded-lg ${i18n.language === opt.code ? 'bg-orange-100 text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-orange-50'}`}
+                    className={`block w-full text-left px-4 py-3 text-base transition-colors rounded-lg bg-white ${i18n.language === opt.code ? 'bg-orange-100 text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-orange-50'}`}
                   >
                     {opt.label} <span className="ml-2">{opt.flag}</span>
                   </button>
@@ -209,6 +218,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <main className="w-full px-0 py-6 flex flex-col items-center justify-start">
         {children}
       </main>
+      <Footer />
     </div>
   );
 };

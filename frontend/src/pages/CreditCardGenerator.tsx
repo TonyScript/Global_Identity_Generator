@@ -12,7 +12,7 @@ interface CreditCardData {
 
 const CreditCardGenerator: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const [selectedCountry, setSelectedCountry] = useState<string>('CN');
+  const [selectedCountry, setSelectedCountry] = useState<string>('US');
   const [generatedCard, setGeneratedCard] = useState<CreditCardData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
@@ -80,7 +80,7 @@ const CreditCardGenerator: React.FC = () => {
                 <select
                   value={selectedCountry}
                   onChange={(e) => setSelectedCountry(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 text-base bg-white/70 backdrop-blur-md transition-all duration-300"
+                  className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 text-base bg-white/70 backdrop-blur-md transition-all duration-300 text-gray-800"
                 >
                   {countries.map((country) => (
                     <option key={country.code} value={country.code}>

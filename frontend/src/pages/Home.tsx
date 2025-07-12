@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   const features = [
     {
       title: t('addressGenerator'),
-      description: 'Generate realistic addresses for different countries and regions',
+      description: t('addressDescription'),
       icon: '📍',
       path: '/address',
       color: 'bg-blue-500',
@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     },
     {
       title: t('phoneGenerator'),
-      description: 'Generate phone numbers with proper country codes and formats',
+      description: t('phoneDescription'),
       icon: '📱',
       path: '/phone',
       color: 'bg-green-500',
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     },
     {
       title: t('creditCardGenerator'),
-      description: 'Generate credit card information with Luhn algorithm validation',
+      description: t('creditCardDescription'),
       icon: '💳',
       path: '/credit-card',
       color: 'bg-purple-500',
@@ -103,8 +103,7 @@ const Home: React.FC = () => {
                   {t('addressGenerator')}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed font-medium">
-                  Generate realistic addresses for different countries and regions. 
-                  All addresses are formatted according to local standards.
+                  {t('addressDescription')}
                 </p>
                 <Link
                   to="/address"
@@ -124,8 +123,7 @@ const Home: React.FC = () => {
                   {t('phoneGenerator')}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed font-medium">
-                  Generate phone numbers with proper country codes and formatting. 
-                  Numbers follow international standards for each country.
+                  {t('phoneDescription')}
                 </p>
                 <Link
                   to="/phone"
@@ -147,8 +145,7 @@ const Home: React.FC = () => {
                   {t('creditCardGenerator')}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed font-medium">
-                  Generate credit card information with Luhn algorithm validation. 
-                  Cards include proper card types for each country.
+                  {t('creditCardDescription')}
                 </p>
                 <Link
                   to="/credit-card"
@@ -168,8 +165,7 @@ const Home: React.FC = () => {
                   {t('language')}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed font-medium">
-                  Switch between Chinese and English interfaces. 
-                  All generated content adapts to your selected language.
+                  {t('languageDescription')}
                 </p>
                 <span className="inline-flex items-center text-gray-600 font-semibold text-lg">
                   {t('language')} 🇨🇳 🇺🇸

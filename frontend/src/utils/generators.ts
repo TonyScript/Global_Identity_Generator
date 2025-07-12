@@ -2,7 +2,7 @@
 export const COUNTRIES = {
   zh: {
     CN: "中国",
-    US: "美国", 
+    US: "美国",
     JP: "日本",
     KR: "韩国",
     GB: "英国",
@@ -13,9 +13,9 @@ export const COUNTRIES = {
     SG: "新加坡"
   },
   en: {
-    CN: "China",
     US: "United States",
-    JP: "Japan", 
+    CN: "China",
+    JP: "Japan",
     KR: "South Korea",
     GB: "United Kingdom",
     DE: "Germany",
